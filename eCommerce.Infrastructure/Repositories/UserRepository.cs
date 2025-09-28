@@ -1,6 +1,4 @@
-using System.Data;
 using Dapper;
-using eCommerce.Core.DTO;
 using eCommerce.Core.Entities;
 using eCommerce.Core.RepositoryContracts;
 using eCommerce.Infrastructure.DbContext;
@@ -43,6 +41,21 @@ internal class UserRepository : IUserRepository
             ApplicationUser? exittingUser = await _dbContext.DbConnection.QueryFirstOrDefaultAsync<ApplicationUser>(query, parameters);
 
             return exittingUser;
+        }
+        else
+            return null;
+    }
+
+    public async Task<ApplicationUser?> GetUserById(Guid? userid)
+    {
+        if (userid != null)
+        {
+            string query = "SELECT * FROM public.\"Users\" WHERE \"UserID\" = @userid";
+            var parameter = new { UserID = userid };
+
+            ApplicationUser? existingUser = await _dbContext.DbConnection.QueryFirstOrDefaultAsync<ApplicationUser>(query, parameter);
+
+            return existingUser;
         }
         else
             return null;

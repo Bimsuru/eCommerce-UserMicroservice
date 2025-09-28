@@ -26,7 +26,7 @@ internal class UserService : IUserService
         }
 
         // Mapped applicationUser into authenticationResponse
-        return _mapper.Map<AuthenticationResponse>(user) with {Success = true, Token = "token"};
+        return _mapper.Map<AuthenticationResponse>(user) with { Success = true, Token = "token" };
     }
 
     public async Task<AuthenticationResponse?> Register(RegisterRequest registerRequest)
@@ -41,7 +41,18 @@ internal class UserService : IUserService
             return null;
         }
 
-        return _mapper.Map<AuthenticationResponse>(registerdUser) with {Success = true, Token = "token"};
+        return _mapper.Map<AuthenticationResponse>(registerdUser) with { Success = true, Token = "token" };
 
+    }
+
+    public async Task<UserResponse?> GetUserById(Guid userid)
+    {
+        var existingUser = await _userRepository.GetUserById(userid);
+
+        if (existingUser != null)
+            return _mapper.Map<UserResponse>(existingUser);
+
+        else
+            return null;
     }
 }

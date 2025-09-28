@@ -17,4 +17,11 @@ public interface IUserService
     /// <param name="registerRequest"></param>
     /// <returns></returns>
     Task<AuthenticationResponse?> Register(RegisterRequest registerRequest);
+
+    /// <summary>
+    /// Get user service method
+    /// </summary>
+    /// <param name="userid"></param>
+    /// <returns></returns>
+    Task<UserResponse?> GetUserById(Guid userid);
 }

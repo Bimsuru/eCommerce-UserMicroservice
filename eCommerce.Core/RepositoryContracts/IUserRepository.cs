@@ -4,7 +4,7 @@ namespace eCommerce.Core.RepositoryContracts;
 
 public interface IUserRepository
 {
-    
+
     /// <summary>
     /// added user into application user table
     /// </summary>
@@ -19,5 +19,12 @@ public interface IUserRepository
     /// <param name="password"></param>
     /// <returns></returns>
     Task<ApplicationUser?> GetUserByEmailAndPassword(string? email, string? password);
+
+    /// <summary>
+    /// get user from the db
+    /// </summary>
+    /// <param name="userid"></param>
+    /// <returns></returns>
+    Task<ApplicationUser?> GetUserById(Guid? userid);
 
 }

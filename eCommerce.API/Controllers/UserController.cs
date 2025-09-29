@@ -18,6 +18,10 @@ public class UserController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<UserResponse>> GetUserById(Guid id)
     {
+        if (id == Guid.Empty)
+        {
+            return BadRequest("Invalid id");
+        }
         var userRes = await _userService.GetUserById(id);
 
         if (userRes == null)
